@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="hero hero-single route bg-image" style="background-image: url({% static 'assets/img/overlay-bg.jpg' %})">
+    <div class="overlay-mf"></div>
+    <div class="hero-content display-table">
+      <div class="table-cell">
+        <div class="container">
+          <h2 class="hero-title mb-4">Portfolio Details</h2>
+          <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item">
+              <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Portfolio Details</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="{{details.image.url}}" alt=""  style="height: 400px;">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="{{details.image_slide.url}}" alt="" style="height: 400px;">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="{{details.image_slide2.url}}" alt="" style="height: 400px;">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong>: {% for cat in details.category.all %}{{ cat}}</li>{% endfor %}
+                <li><strong>Client</strong>: {{ details.project_client }}</li>
+                <li><strong>Project date</strong>: {{ details.date_created|date:"d M Y"}}</li>
+                {% if details.project_url %}
+                <li><strong>Project URL</strong>: <a href="#">{{details.project_url}}</a></li>
+                {% endif %}
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>Description</h2>
+              <p> {{details.description|linebreaks}}</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  {% endblock content %}
